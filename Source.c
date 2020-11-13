@@ -16,7 +16,6 @@ void printList(Position);
 void Sort(int, Position);
 void Union(Position, Position, Position);
 void Intersection(Position, Position, Position);
-void insertEnd(Position, Position);
 
 int main() {
 	FILE *FILE;
@@ -42,9 +41,6 @@ int main() {
 	Intersection(&head1, &head2, &head4);
     printf("\nIntersection of 2 sets:\n\t\n");
 	printList(&head4);
-
-	system("pause");
-
 
 	return 0;
 }
@@ -96,10 +92,7 @@ void Intersection(Position P, Position Q, Position head) {
 		P = P->next;
 	}
 
-
 }
-
-
 
 void Union(Position P, Position Q, Position head) {
 
@@ -118,7 +111,6 @@ void Union(Position P, Position Q, Position head) {
 			Sort(P->el, head);
 		}
 		
-
 		if (Q->el != P->el) {
 			Sort(Q->el, head);
 		}
@@ -132,31 +124,19 @@ void Union(Position P, Position Q, Position head) {
 	}
 
 	if (P == NULL) {
-		while (Q != NULL) {
-			S = createSet(Q->el);
-			insertEnd(head, S);
+		while (Q != NULL){
+			Sort(Q->el, head);
 			Q = Q->next;
 		}
 	}
 	
 	if (Q == NULL) {
 		while (P != NULL) {
-			S = createSet(P->el);
-			insertEnd(head, S);
+			Sort(P->el, head);
 			P = P->next;
 		}
 	}
 
-}
-
-void insertEnd(Position head, Position S) {
-	
-	
-	while (head->next != NULL)
-		head = head->next;
-
-	S->next = head->next;
-	head->next = S;
 }
 
 Position createSet(int el) {
